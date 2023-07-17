@@ -26,4 +26,43 @@ const getComputerChoice = () => {
   */
 }
 
-console.log(getComputerChoice())
+const getResult = (player, computer) => {
+  // possible choices: Rock, Paper, Scissors
+  // Rock > Scissors; Rock < Paper
+  // Scissors > Paper; Scissors < Rock
+  // Paper > Rock; Paper < Scissors
+  if (player === 'rock') {
+    if (computer === 'rock') {
+      return 'DRAW!'
+    } else if (computer === 'scissors') {
+      return 'You Win! Rock beats Scissors'
+    } else if (computer === 'paper') {
+      return 'You Lose! Paper beats Rock'
+    }
+  } else if (player === 'paper') {
+    if (computer === 'paper') {
+      return 'DRAW!'
+    } else if (computer === 'rock') {
+      return 'You Win! Paper beats Rock'
+    } else if (computer === 'scissors') {
+      return 'You Lose! Scissors beats Paper'
+    }
+  } else if (player === 'scissors') {
+    if (computer === 'scissors') {
+      return 'DRAW!'
+    } else if (computer === 'paper') {
+      return 'You Win! Scissors beats Paper'
+    } else if (computer === 'rock') {
+      return 'You Lose! Rock beats Scissors'
+    }
+  } else {
+    return 'Sorry Invalid choices!'
+  }
+}
+
+const playRound = (playerSelection, computerSelection) => {
+  return getResult(
+    playerSelection.toLowerCase(),
+    computerSelection.toLowerCase()
+  )
+}
