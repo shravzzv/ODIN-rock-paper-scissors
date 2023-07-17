@@ -66,3 +66,31 @@ const playRound = (playerSelection, computerSelection) => {
     computerSelection.toLowerCase()
   )
 }
+
+const game = () => {
+  // play a 5 round game that keeps score and reports winner or loser at the end
+  let playerScore = 0
+  let computerScore = 0
+  const playerChoice = prompt(
+    'Enter your Pick: Rock, Paper or Scissors',
+    'Rock'
+  )
+
+  for (let i = 1; i <= 5; i++) {
+    let roundResult = playRound(playerChoice, getComputerChoice())
+    if (roundResult.includes('Win')) {
+      playerScore++
+    }
+    if (roundResult.includes('Lose')) {
+      computerScore++
+    }
+  }
+
+  return playerScore > computerScore
+    ? `You Won the game ${playerScore}-${computerScore}`
+    : playerScore === computerScore
+    ? `The game ended in a Draw ${playerScore}-${computerScore}`
+    : `You Lost the game ${playerScore}-${computerScore}`
+}
+
+game()
