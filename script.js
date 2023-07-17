@@ -93,4 +93,4 @@ const game = () => {
     : `You Lost the game ${playerScore}-${computerScore}`
 }
 
-game()
+console.log(game())    
