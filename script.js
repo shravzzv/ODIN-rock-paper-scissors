@@ -1,4 +1,19 @@
-// I'm getting pseudocode from the instructions
+const buttons = document.querySelectorAll('.button')
+const computerChoiceElement = document.querySelector('.computer-choice')
+const resultElement = document.querySelector('.result')
+const playerScoreElement = document.querySelector('.player-score')
+const computerScoreElement = document.querySelector('.computer-score')
+
+buttons.forEach((button) =>
+  button.addEventListener('click', (e) => {
+    playRound(e.target.textContent.toLowerCase(), getComputerChoice())
+    game(e.target.textContent.toLowerCase())
+  })
+)
+
+let round = 0
+let playerScore = 0
+let computerScore = 0
 
 function getRandomIntInclusive(min, max) {
   // from mdn web docs
@@ -8,89 +23,51 @@ function getRandomIntInclusive(min, max) {
 }
 
 const getComputerChoice = () => {
-  // randomly returns either 'Rock', 'Paper' or 'Scissors'
-  const choices = {
-    1: 'Rock',
-    2: 'Paper',
-    3: 'Scissors',
-  }
-  const index = getRandomIntInclusive(1, 3)
-  const choice = choices[index]
-  return choice
-  /*pseudocode 
-  Initialize a function getComputerChoice,
-  make available choices as 'Rock', 'Paper' or 'Scissors',
-  return a random number from computer between 1-3,
-  associate computer's random choice with index,
-  return a choice
-  */
+  const choices = ['rock ✊', 'paper ✋', 'scissors ✌️']
+  const index = getRandomIntInclusive(0, 2)
+  computerChoiceElement.innerText = choices[index]
+  return choices[index]
 }
 
 const getResult = (player, computer) => {
-  // possible choices: Rock, Paper, Scissors
-  // Rock > Scissors; Rock < Paper
-  // Scissors > Paper; Scissors < Rock
-  // Paper > Rock; Paper < Scissors
-  if (player === 'rock') {
-    if (computer === 'rock') {
-      return 'DRAW!'
-    } else if (computer === 'scissors') {
-      return 'You Win! Rock beats Scissors'
-    } else if (computer === 'paper') {
-      return 'You Lose! Paper beats Rock'
+  const choices = ['rock ✊', 'paper ✋', 'scissors ✌️']
+  if (player === choices[0]) {
+    if (computer === choices[0]) {
+      return `Draw.`
+    } else if (computer === choices[1]) {
+      return `You Lose.`
+    } else {
+      return `You Win!`
     }
-  } else if (player === 'paper') {
-    if (computer === 'paper') {
-      return 'DRAW!'
-    } else if (computer === 'rock') {
-      return 'You Win! Paper beats Rock'
-    } else if (computer === 'scissors') {
-      return 'You Lose! Scissors beats Paper'
+  } else if (player === choices[1]) {
+    if (computer === choices[1]) {
+      return `Draw.`
+    } else if (computer === choices[2]) {
+      return `You Lose.`
+    } else {
+      return `You Win!`
     }
-  } else if (player === 'scissors') {
-    if (computer === 'scissors') {
-      return 'DRAW!'
-    } else if (computer === 'paper') {
-      return 'You Win! Scissors beats Paper'
-    } else if (computer === 'rock') {
-      return 'You Lose! Rock beats Scissors'
+  } else if (player === choices[2]) {
+    if (computer === choices[2]) {
+      return `Draw.`
+    } else if (computer === choices[0]) {
+      return `You Lose.`
+    } else {
+      return `You Win!`
     }
   } else {
     return 'Sorry Invalid choices!'
   }
 }
 
-const playRound = (playerSelection, computerSelection) => {
-  return getResult(
-    playerSelection.toLowerCase(),
-    computerSelection.toLowerCase()
-  )
-}
-
-const game = () => {
-  // play a 5 round game that keeps score and reports winner or loser at the end
-  let playerScore = 0
-  let computerScore = 0
-  const playerChoice = prompt(
-    'Enter your Pick: Rock, Paper or Scissors',
-    'Rock'
-  )
-
-  for (let i = 1; i <= 5; i++) {
-    let roundResult = playRound(playerChoice, getComputerChoice())
-    if (roundResult.includes('Win')) {
-      playerScore++
-    }
-    if (roundResult.includes('Lose')) {
-      computerScore++
-    }
+const playRound = (player, computer) => {
+  const result = getResult(player, computer)
+  if (result.includes('W')) {
+    playerScore++
+  } else if (result.includes('L')) {
+    computerScore++
   }
-
-  return playerScore > computerScore
-    ? `You Won the game ${playerScore}-${computerScore}`
-    : playerScore === computerScore
-    ? `The game ended in a Draw ${playerScore}-${computerScore}`
-    : `You Lost the game ${playerScore}-${computerScore}`
+  computerScoreElement.innerText = computerScore
+  playerScoreElement.innerText = playerScore
+  resultElement.innerText = result
 }
-
-console.log(game())    

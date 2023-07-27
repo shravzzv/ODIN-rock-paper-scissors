@@ -3,10 +3,68 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="shortcut icon"
+      href="https://images.unsplash.com/photo-1614032686163-bdc24c13d0b6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cm9jayUyMHBhcGVyJTIwc2Npc3NvcnN8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60"
+      type="image/x-icon"
+    />
     <title>Rock Paper Scissors</title>
+    <script src="script.js" defer></script>
   </head>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 2em;
+      font-family: sans-serif;
+    }
+
+    .button {
+      cursor: pointer;
+      padding: 0.5em 1em;
+      border: none;
+      border-radius: 5px;
+      font-size: 1.2rem;
+    }
+
+    .computer-choice {
+      cursor: not-allowed;
+    }
+
+    .score {
+      border: 2px solid gray;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      body {
+        color: white;
+        background-color: #0d1117;
+      }
+    }
+  </style>
+
   <body>
-    <p>Look in the <code>console</code></p>
-    <script src="script.js"></script>
+    <h1 class="title">Rock Paper Scissors</h1>
+    <h2 class="subTitle">Make your choice:</h2>
+    <button class="button">Rock ✊</button>
+    <button class="button">Paper ✋</button>
+    <button class="button">Scissors ✌️</button>
+
+    <h2 class="subTitle">Computer's choice:</h2>
+    <button class="button computer-choice">💻</button>
+
+    <div>
+      <h2>Scores:</h2>
+      <span>You:</span>
+      <span class="player-score"></span>
+      <hr />
+      <span>Computer:</span>
+      <span class="computer-score"></span>
+      <h3 class="result"></h3>
+    </div>
   </body>
 </html>
